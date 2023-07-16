@@ -1,14 +1,24 @@
+import Header from "./components/Header";
+
+import Footer from "./components/Footer";
+import Cart from "./components/Cart";
+import ProductList from "./components/ProductList";
+import { useState } from "react";
+
 function App() {
-  const yeah = async () => {
-    setTimeout(() => console.log(1), 0);
-    await Promise.resolve(2)
-      .then(console.log)
-      .catch((err) => console.log(err));
-  };
+  const [viewCart, setViewCart] = useState<boolean>(false);
 
-  yeah();
+  const pageContent = viewCart ? <Cart /> : <ProductList />;
 
-  return <div className="app"></div>;
+  const content = (
+    <>
+      <Header viewCart={viewCart} setViewCart={setViewCart} />
+      {pageContent}
+      <Footer viewCart={viewCart} />
+    </>
+  );
+
+  return content;
 }
 
 export default App;
